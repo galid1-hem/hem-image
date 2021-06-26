@@ -11,8 +11,6 @@ const sharp = require('sharp');
 exports.handler = async (event, context, callback) => {
   const { request, response } = event.Records[0].cf;
 
-  const bucket = 'hem-image';
-
   // check if image is present and not cached.
   if (response.status == 200) {
     const params = querystring.parse(request.querystring);
@@ -47,6 +45,7 @@ exports.handler = async (event, context, callback) => {
       callback(null, response);
     }
 
+    const bucket = 'hem-image';
     try {
       const s3Object = await s3.getObject({
         Bucket: bucket,
@@ -86,6 +85,7 @@ exports.handler = async (event, context, callback) => {
           break;
         }
       }
+
 
       responseToOk(resizedImage, requiredFormat);
       return callback(null, response);

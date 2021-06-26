@@ -6,14 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class HemImageUploaderApplication: CommandLineRunner {
-	@Autowired
-	lateinit var testM: TestM
-
-	override fun run(vararg args: String?) {
-		testM.createItems()
-	}
-}
+class HemImageUploaderApplication
 
 fun main(args: Array<String>) {
 	runApplication<HemImageUploaderApplication>(*args)
