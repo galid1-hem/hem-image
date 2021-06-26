@@ -69,9 +69,9 @@ class CloudFrontUrlService : UrlService {
             ),
             POST to mapOf(
                 SMALL to mapOf(
-                    RESIZE_OPTION_SIZE to "10",
+                    RESIZE_OPTION_SIZE to "1",
                     RESIZE_OPTION_TYPE to "crop",
-                    RESIZE_OPTION_QUALITY to "80"
+                    RESIZE_OPTION_QUALITY to "10"
                 ),
                 MEDIUM to mapOf(
                     RESIZE_OPTION_SIZE to "10",

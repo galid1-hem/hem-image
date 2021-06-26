@@ -2,6 +2,7 @@ package com.galid.uploader.presentation
 
 import com.galid.uploader.application.ImageService
 import com.galid.uploader.application.dtos.ImageDto
+import com.galid.uploader.application.dtos.ImageDto.UploadResponse
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/api/v1/images")
@@ -12,13 +13,11 @@ class ImageController(
     @PostMapping
     fun uploadImages(
         @ModelAttribute request: ImageDto.UploadRequest
-    ): Response<Any> {
+    ): Response<List<UploadResponse>> {
         validateRequest(request)
 
-        imageService.uploadImage(request)
-
         return Response(
-            data = null
+            data = imageService.uploadImage(request)
         )
     }
 

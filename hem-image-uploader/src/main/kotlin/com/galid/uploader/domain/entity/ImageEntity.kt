@@ -26,14 +26,3 @@ class ImageEntity(
         SMALL("small"), MEDIUM("medium"), LARGE("large")
     }
 }
-
-// Image를 획득할 수 있는 url경로
-//class ImageUrls(
-//    val small: String? = null,
-//    val medium: String? = null,
-//    val large: String? = null,
-//) {
-//    enum class Size {
-//        SMALL, MEDIUM, LARGE
-//    }
-//}

@@ -4,5 +4,5 @@ import com.galid.uploader.domain.entity.ImageEntity
 
 interface ImageRepository {
     fun save(imageEntity: ImageEntity)
-    fun saveAll(imageEntities: List<ImageEntity>)
+    fun saveAll(imageEntities: List<ImageEntity>): List<ImageEntity>
 }

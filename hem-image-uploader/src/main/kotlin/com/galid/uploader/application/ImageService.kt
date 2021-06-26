@@ -1,7 +1,9 @@
 package com.galid.uploader.application
 
 import com.galid.uploader.application.dtos.ImageDto
+import com.galid.uploader.application.dtos.ImageDto.UploadResponse
 import com.galid.uploader.domain.entity.ImageEntity
+import com.galid.uploader.domain.entity.ImageEntity.*
 import com.galid.uploader.domain.repository.ImageRepository
 import com.galid.uploader.util.IDGenerator
 import org.springframework.stereotype.Service
@@ -16,15 +18,19 @@ class ImageService(
 
     fun uploadImage(
         request: ImageDto.UploadRequest
-    ) {
+    ): List<UploadResponse> {
         // Entity 생성
         val imageEntities = fromDto(request)
 
         // dynamoDB Item 생성
-        imageRepository.saveAll(imageEntities)
+        val savedEntities = imageRepository.saveAll(imageEntities)
 
         // S3에 업로드
         storageService.upload(request)
+
+        return savedEntities.map {
+            fromEntity(it)
+        }
     }
 
     fun getImages(
@@ -52,5 +58,14 @@ class ImageService(
                 )
             )
         }
+    }
+
+    internal fun fromEntity(
+        entity: ImageEntity
+    ): UploadResponse {
+        return UploadResponse(
+            id = entity.id!!,
+            thumbnailUrl = entity.imageUrls[Size.SMALL.value]!!
+        )
     }
 }

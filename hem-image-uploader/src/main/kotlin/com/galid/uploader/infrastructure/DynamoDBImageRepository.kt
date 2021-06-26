@@ -16,13 +16,17 @@ class DynamoDBImageRepository : ImageRepository {
         TODO("Not yet implemented")
     }
 
-    override fun saveAll(imageEntities: List<ImageEntity>) {
+    override fun saveAll(
+        imageEntities: List<ImageEntity>
+    ): List<ImageEntity> {
         val newItems = imageEntities.map {
             WriteRequest(PutRequest(toDynamoDBTable(it)))
         }
 
         AWSClient.dynamoDB
             .batchWriteItem(mapOf(TABLE_NAME to newItems))
+
+        return imageEntities
     }
 
     private fun toDynamoDBTable(it: ImageEntity) = mapOf(

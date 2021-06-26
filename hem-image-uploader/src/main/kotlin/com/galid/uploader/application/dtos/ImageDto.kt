@@ -13,7 +13,8 @@ class ImageDto {
     )
 
     data class UploadResponse(
-        val mediaIds: List<String>
+        val id: String,
+        val thumbnailUrl: String
     )
 
     data class GetRequest(
